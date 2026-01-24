@@ -43,20 +43,21 @@ export class TasksComponent implements OnInit {
     this.taskToEdit.set(null);
   }
 
-  saveTask() {
-    const updatedTask = this.taskToEdit();
-    if (updatedTask) {
-      console.log('Saved:', updatedTask);
-      
-      this.tasks.update(list => list.map(t => t.id === updatedTask.id ? updatedTask : t));
-      this.closeEditModal();
-    }
-  }
-
   changeStatus(newStatus: string) {
     const task = this.taskToEdit();
     if (task) {
-      this.taskToEdit.set({ ...task, status: newStatus });
+      this.taskService.updateTaskStatus(task.id, newStatus).subscribe({
+        next: (updatedTask) => {
+          this.taskToEdit.set(updatedTask);
+          if (updatedTask) {
+            this.tasks.update(list => list.map(t => t.id === updatedTask.id ? updatedTask : t));
+          }
+          console.log(updatedTask.status);
+        },
+        error: (err) => {
+          console.error('Err:', err);
+        }
+      });
     }
   }
 
@@ -76,4 +77,6 @@ export class TasksComponent implements OnInit {
       error: (err) => console.error('err', err)
     });
   }
+
+  
 }

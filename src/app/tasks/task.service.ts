@@ -8,9 +8,12 @@ import { Task } from './task.model';
 })
 export class TaskService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/tasks'; // Ścieżka pod proxy
+  private apiUrl = 'http://localhost:8080/api/tasks'; //Proxy
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.apiUrl);
+  }
+  updateTaskStatus(id: number, newStatus: string): Observable<Task> {
+    return this.http.post<Task>(`${this.apiUrl}/status/${id}`, { status: newStatus });
   }
 }
