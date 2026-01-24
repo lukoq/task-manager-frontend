@@ -1,0 +1,96 @@
+<div class="center-wrapper">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (task of tasks(); track task.id) {
+          <tr class="main-row" (click)="toggleTask(task.id)" [class.active]="expandedTaskId() === task.id">
+            <td>#{{ task.id }}</td>
+            <td class="bold">{{ task.title }}</td>
+            <td>
+              <span class="badge" [attr.data-status]="task.status">{{ task.status }}</span>
+            </td>
+            <td class="arrow">
+              <span class="material-icons">
+                {{ expandedTaskId() === task.id ? 'expand_less' : 'expand_more' }}
+              </span>
+            </td>
+          </tr>
+
+          @if (expandedTaskId() === task.id) {
+            <tr class="details-row">
+              <td colspan="4">
+                <div class="details-content">
+                  <p><strong>Description:</strong> {{ task.description }}</p>
+                  <p><strong>Date:</strong> {{ task.createdAt | date:'short' }}</p>
+                  <div class="actions">
+                    <button class="btn-edit" (click)="openEditModal(task)">
+                      Edit a status
+                    </button>
+                    <button class="btn-delete" (click)="openRemoveModal(task)">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (isEditModalOpen()) {
+  <div class="modal-backdrop" (click)="closeEditModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>#{{ taskToEdit()?.id }} Edit a status</h3>
+      </div>
+      <div class="modal-body">
+        <div class="status-list">
+          @for (status of statusOptions; track status) {
+            <div 
+              class="status-option" 
+              [class.selected]="taskToEdit()?.status === status"
+              (click)="changeStatus(status)">
+              <div class="status-info">
+                {{ status.replace('_', ' ') }}
+              </div>
+              @if (taskToEdit()?.status === status) {
+                <span class="material-icons selected-check">check</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+@if (isRemoveModalOpen()) {
+  <div class="modal-backdrop" (click)="closeRemoveModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>#{{ taskToEdit()?.id }} Are you sure to delete this item?</h3>
+      </div>
+      <div class="modal-body">
+        <div class="modal-actions">
+          <button class="btn-edit" (click)="closeRemoveModal()"> 
+            Cancel
+          </button>
+          <button class="btn-delete-outlined">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
