@@ -61,6 +61,19 @@ export class TasksComponent implements OnInit {
     }
   }
 
+  confirmDelete() {
+    const task = this.taskToEdit();
+    if (task) {
+      this.taskService.deleteTask(task.id).subscribe({
+        next: () => {
+          this.tasks.update(list => list.filter(t => t.id !== task.id));
+          this.closeRemoveModal();
+        },
+        error: (err) => console.error(err)
+      });
+    }
+  }
+
   toggleTask(id: number) {
     this.expandedTaskId.update(currentId => currentId === id ? null : id);
   }
