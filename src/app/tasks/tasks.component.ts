@@ -1,14 +1,14 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { TaskService } from './task.service';
 import { Task } from './task.model';
-import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -17,11 +17,23 @@ export class TasksComponent implements OnInit {
   
   tasks = signal<Task[]>([]);
   expandedTaskId = signal<number|null>(null);
+  taskToEdit = signal<Task|null>(null);
   isEditModalOpen = signal(false);
   isRemoveModalOpen = signal(false);
-  taskToEdit = signal<Task|null>(null);
+  isAddModalOpen = signal(false);
 
   readonly statusOptions = ['TODO', 'IN_PROGRESS', 'DONE'];
+
+  taskForm = new FormGroup({
+    title: new FormControl('', { 
+      nonNullable: true, 
+      validators: [Validators.required, Validators.minLength(3)] 
+    }),
+    description: new FormControl('', { 
+      nonNullable: true 
+    }),
+    status: new FormControl('TODO', { nonNullable: true })
+  });
 
   openEditModal(task: Task) {
     this.taskToEdit.set({ ...task }); //copy
@@ -33,6 +45,10 @@ export class TasksComponent implements OnInit {
     this.isRemoveModalOpen.set(true);
   }
 
+  openAddModal() {
+    this.isAddModalOpen.set(true);
+  }
+
   closeEditModal() {
     this.isEditModalOpen.set(false);
     this.taskToEdit.set(null);
@@ -41,6 +57,18 @@ export class TasksComponent implements OnInit {
   closeRemoveModal() {
     this.isRemoveModalOpen.set(false);
     this.taskToEdit.set(null);
+  }
+
+  closeAddModal() {
+    this.isAddModalOpen.set(false);
+  }
+
+  toggleTask(id: number) {
+    this.expandedTaskId.update(currentId => currentId === id ? null : id);
+  }
+
+  ngOnInit(): void {
+    this.loadTasks();
   }
 
   changeStatus(newStatus: string) {
@@ -74,14 +102,6 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  toggleTask(id: number) {
-    this.expandedTaskId.update(currentId => currentId === id ? null : id);
-  }
-
-  ngOnInit(): void {
-    this.loadTasks();
-  }
-
   loadTasks() {
     this.taskService.getTasks().subscribe({
       next: (data) => {
@@ -91,5 +111,24 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  
+  onSubmit() {
+    if (this.taskForm.valid) {
+      const newTask = this.taskForm.getRawValue();
+      this.taskService.addTask(newTask).subscribe({
+        next: (response) => {
+          this.tasks.update(list => [...list, response]);
+          this.taskForm.reset({ 
+            title: '', 
+            description: '', 
+            status: 'TODO' 
+          });
+          this.closeAddModal(); 
+        },
+        error: (err) => {
+          console.error('Err:', err);
+        }
+      });
+    }
+  }
+
 }
