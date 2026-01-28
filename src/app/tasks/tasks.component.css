@@ -19,11 +19,11 @@ table {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  background-color: white;
+  background-color: var(--color-bg-main);
 }
 thead {
   background-color: #2c3e50;
-  color: white;
+  color: var(--color-bg-main);
 }
 th {
   padding: 15px;
@@ -34,7 +34,7 @@ th {
 td {
   min-width: 120px;
   padding: 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-light);
 }
 .main-row {
   cursor: pointer;
@@ -42,11 +42,11 @@ td {
 }
 
 .main-row:hover {
-  background-color: #f8f9fa;
+  background-color: var(--color-bg-hover);
 }
 
 .main-row.active {
-  background-color: #ecf0f1;
+  background-color: var(--color-bg-active);
 }
 
 .bold { 
@@ -55,12 +55,12 @@ td {
 
 .details-row td {
   padding: 0; 
-  background-color: #fafafa;
+  background-color: var(--color-bg-details);
 }
 
 .details-content {
   padding: 20px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border-normal);
   animation: slideDown 0.3s ease-out;
 }
 
@@ -89,23 +89,23 @@ td {
   padding: 18px 25px;
   cursor: pointer;
   transition: background 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border-light);
 }
 .status-option:hover {
-  background-color: #f0f7ff;
+  background-color: var(--color-bg-selected);
 }
 .status-option.selected {
-  background-color: #f0f7ff;
+  background-color: var(--color-bg-selected);
 }
 .status-info {
   display: flex;
   align-items: center;
   gap: 15px;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--color-text-primary);
 }
 .status-option.selected .status-info {
-  color: #001f34;
+  color: var(--color-text-secondary);
 }
 .status-modal {
   padding: 0;  
@@ -122,49 +122,36 @@ button {
   cursor: pointer;
 }
 .btn-edit { 
-  background: #8dc2f4; 
-  color: white;
+  background: var(--color-btn-blue);
+  color: var(--color-bg-main);
+}
+.btn-add { 
+  background: var(--color-btn-green);
+  color: var(--color-bg-main);
+}
+.btn-cancel-outlined { 
+  border: 1px solid var(--color-btn-red);
+  background-color: var(--color-bg-main);
+  color: var(--color-btn-red);
 }
 .btn-delete { 
-  background: #ff7675; 
-  color: white;
+  background: var(--color-btn-red);
+  color: var(--color-bg-main);
 }
 .btn-delete-outlined {
-  border: 1px solid #ff7675;
-  background-color: #ffeded;
-  color: #ff7675;
+  border: 1px solid var(--color-btn-red);
+  background-color: var(--color-btn-light-red);
+  color: var(--color-btn-red);
 }
 .btn-action {
   width: 100%;          
   padding: 10px 20px;
-  background-color: #2a9f62;
-  color: white;
+  background-color: var(--color-btn-green);
+  color: var(--color-bg-main);
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.2s;
-}
-.btn-primary {
-  background-color: #2a9f62;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.btn-primary:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  border: 1px solid #2c3e50;
-  color: #2c3e50;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
 }
 .btn-save-status:active {
   transform: scale(0.98);
@@ -185,14 +172,14 @@ button {
   z-index: 9999;
 }
 .modal-content {
-  background-color: #ddd;
+  background-color: var(--color-bg-modal);
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   padding-bottom: 20px;
   min-width: 200px;
 }
 .modal-add-content {
-  background-color: #ddd;
+  background-color: var(--color-bg-modal);
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   padding: 40px;
@@ -225,33 +212,33 @@ button {
 
 /* Inputs */
 
-.badge[data-status="TODO"] { background: #ffeaa7; color: #d35400; }
-.badge[data-status="DONE"] { background: #6df799; color: #2a9f62; }
-.badge[data-status="IN_PROGRESS"] { background: #8dc2f4; color: #4858a9; }
+.badge[data-status="TODO"] { background: var(--color-bdg-todo); color: var(--color-bdg-todo-content); }
+.badge[data-status="DONE"] { background: var(--color-bdg-done); color: var(--color-bdg-done-content); }
+.badge[data-status="IN_PROGRESS"] { background: var(--color-bdg-inprogress); color: var(--color-bdg-inprogress-content); }
 
 .selected-check {
-  color: #2a9f62;
+  color: var(--color-btn-green);
   font-size: 20px;
 }
 label {
   font-weight: 600;
   font-size: 0.9rem;
-  color: #444;
+  color: var(--color-text-light);
 }
 input, textarea {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-bg-input);
   border-radius: 6px;
   font-family: inherit;
   font-size: 1rem;
 }
 input:focus, textarea:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--color-text-focus);
   box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
 }
 input.error {
-  border-color: #dc3545;
+  border-color: var(--color-text-error);
 }
 .modal-footer {
   margin-top: 2rem;

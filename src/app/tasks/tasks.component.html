@@ -125,12 +125,11 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn-secondary" (click)="closeAddModal()">Cancel</button>
-            <button type="submit" class="btn-primary" [disabled]="taskForm.invalid">
+            <button type="button" class="btn-cancel-outlined" (click)="closeAddModal()">Cancel</button>
+            <button type="submit" class="btn-add" [disabled]="taskForm.invalid">
               Create a task
             </button>
           </div>
-
         </form>
       </div>
 
