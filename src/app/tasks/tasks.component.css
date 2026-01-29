@@ -19,11 +19,11 @@ table {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  background-color: var(--color-bg-main);
+  background-color: var(--color-bg-sheet);
 }
 thead {
-  background-color: #2c3e50;
-  color: var(--color-bg-main);
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
 }
 th {
   padding: 15px;
@@ -123,20 +123,20 @@ button {
 }
 .btn-edit { 
   background: var(--color-btn-blue);
-  color: var(--color-bg-main);
+  color: var(--color-text-white);
 }
 .btn-add { 
   background: var(--color-btn-green);
-  color: var(--color-bg-main);
+  color: var(--color-text-white);
 }
 .btn-cancel-outlined { 
   border: 1px solid var(--color-btn-red);
-  background-color: var(--color-bg-main);
+  background-color: var(--color-bg-sheet);
   color: var(--color-btn-red);
 }
 .btn-delete { 
   background: var(--color-btn-red);
-  color: var(--color-bg-main);
+  color: var(--color-text-white);
 }
 .btn-delete-outlined {
   border: 1px solid var(--color-btn-red);
@@ -147,7 +147,7 @@ button {
   width: 100%;          
   padding: 10px 20px;
   background-color: var(--color-btn-green);
-  color: var(--color-bg-main);
+  color: var(--color-text-white);
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
