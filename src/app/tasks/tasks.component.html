@@ -58,19 +58,17 @@
         <h3>#{{ taskToEdit()?.id }} Edit a status</h3>
       </div>
       <div class="modal-body">
+
+
         <div class="status-list">
           @for (status of statusOptions; track status) {
-            <div 
-              class="status-option" 
-              [class.selected]="taskToEdit()?.status === status"
-              (click)="changeStatus(status)">
-              <div class="status-info">
-                {{ status.replace('_', ' ') }}
-              </div>
-              @if (taskToEdit()?.status === status) {
-                <span class="material-icons selected-check">check</span>
-              }
-            </div>
+              <button
+                class="badge badge-btn"
+                [attr.data-status]="status"
+                [class.selected]="taskToEdit()?.status === status"
+                (click)="changeStatus(status)">
+                {{status}}
+              </button>
           }
         </div>
       </div>

@@ -80,16 +80,9 @@ td {
 
 .status-list {
   display: flex;
-  flex-direction: column;
-}
-.status-option {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 25px;
-  cursor: pointer;
-  transition: background 0.2s;
-  border-bottom: 1px solid var(--color-border-light);
+  flex-direction: row;
+  min-width: 300px;
+  gap: 15px;
 }
 .status-option:hover {
   background-color: var(--color-bg-selected);
@@ -216,10 +209,6 @@ button {
 .badge[data-status="DONE"] { background: var(--color-bdg-done); color: var(--color-bdg-done-content); }
 .badge[data-status="IN_PROGRESS"] { background: var(--color-bdg-inprogress); color: var(--color-bdg-inprogress-content); }
 
-.selected-check {
-  color: var(--color-btn-green);
-  font-size: 20px;
-}
 label {
   font-weight: 600;
   font-size: 0.9rem;
@@ -251,4 +240,20 @@ input.error {
   border-radius: 15px;
   font-size: 0.75rem;
   background: #dfe6e9;
+}
+.badge-btn {
+  position: relative;
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  transition: filter 0.2s ease, transform 0.2s ease;
+  border: 2px solid transparent;
+}
+.badge-btn:hover {
+  filter: brightness(0.9); 
+}
+.badge-btn.selected {
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px currentColor;
 }
