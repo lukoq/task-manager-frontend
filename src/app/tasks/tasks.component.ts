@@ -35,13 +35,22 @@ export class TasksComponent implements OnInit {
     status: new FormControl('TODO', { nonNullable: true })
   });
 
+  newDescriptionForm = new FormGroup({
+    description: new FormControl('', { 
+      nonNullable: true 
+    })
+  });
+
   openEditModal(task: Task) {
     this.taskToEdit.set({ ...task }); //copy
     this.isEditModalOpen.set(true);
+    this.newDescriptionForm.patchValue({
+      description: task.description
+    });
+    this.newDescriptionForm.get('description')?.disable();
   }
 
   openRemoveModal(task: Task) {
-    this.taskToEdit.set({ ...task }); //copy
     this.isRemoveModalOpen.set(true);
   }
 
@@ -52,6 +61,7 @@ export class TasksComponent implements OnInit {
   closeEditModal() {
     this.isEditModalOpen.set(false);
     this.taskToEdit.set(null);
+    this.newDescriptionForm.reset(); 
   }
 
   closeRemoveModal() {
@@ -65,6 +75,12 @@ export class TasksComponent implements OnInit {
 
   toggleTask(id: number) {
     this.expandedTaskId.update(currentId => currentId === id ? null : id);
+  }
+
+  toggleDescriptionEdit(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    const descControl = this.newDescriptionForm.get('description');
+    isChecked ? descControl?.enable() : descControl?.disable();
   }
 
   ngOnInit(): void {
@@ -86,6 +102,26 @@ export class TasksComponent implements OnInit {
           console.error('Err:', err);
         }
       });
+    }
+  }
+  changeDescription() {
+    const task = this.taskToEdit();
+    const newDescription = this.newDescriptionForm.get('description')?.value;
+      if (task && newDescription !== undefined && newDescription !== task.description) {
+        this.taskService.updateTaskDescription(task.id, newDescription).subscribe({
+          next: (updatedTask) => {
+            this.taskToEdit.set(updatedTask);
+            if (updatedTask) {
+              this.tasks.update(list => list.map(t => t.id === updatedTask.id ? updatedTask : t));
+            }
+            console.log(updatedTask.status);
+          },
+          error: (err) => {
+            console.error('Err:', err);
+          }
+        });
+
+        this.closeEditModal();
     }
   }
 

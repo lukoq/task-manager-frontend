@@ -16,6 +16,9 @@ export class TaskService {
   updateTaskStatus(id: number, newStatus: string): Observable<Task> {
     return this.http.post<Task>(`${this.apiUrl}/status/${id}`, { status: newStatus });
   }
+  updateTaskDescription(id: number, newDesc: string): Observable<Task> {
+    return this.http.post<Task>(`${this.apiUrl}/description/${id}`, { description: newDesc });
+  }
   deleteTask(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

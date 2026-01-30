@@ -76,34 +76,6 @@ td {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Statuses */
-
-.status-list {
-  display: flex;
-  flex-direction: row;
-  min-width: 300px;
-  gap: 15px;
-}
-.status-option:hover {
-  background-color: var(--color-bg-selected);
-}
-.status-option.selected {
-  background-color: var(--color-bg-selected);
-}
-.status-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-}
-.status-option.selected .status-info {
-  color: var(--color-text-secondary);
-}
-.status-modal {
-  padding: 0;  
-  overflow: hidden;
-}
 
 /* Buttons */
 
@@ -146,10 +118,17 @@ button {
   font-weight: bold;
   transition: background-color 0.2s;
 }
-.btn-save-status:active {
-  transform: scale(0.98);
+.btn-save {
+  background: var(--color-btn-green);
+  color: var(--color-text-white);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
-
+.btn-save:disabled {
+  opacity: 0.5;      
+  cursor: not-allowed;   
+  pointer-events: none;   
+}
 /*Modals*/
 
 .modal-backdrop {
@@ -168,8 +147,12 @@ button {
   background-color: var(--color-bg-modal);
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  padding-inline: 30px;
   padding-bottom: 20px;
   min-width: 200px;
+}
+.modal-body {
+  flex-direction: column;
 }
 .modal-add-content {
   background-color: var(--color-bg-modal);
@@ -195,12 +178,14 @@ button {
 .no-padding {
   padding: 0;
 }
-
 .form-group {
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.edit-desc{
+  padding-top: 20px;
 }
 
 /* Inputs */
@@ -220,6 +205,7 @@ input, textarea {
   border-radius: 6px;
   font-family: inherit;
   font-size: 1rem;
+  resize: none;
 }
 input:focus, textarea:focus {
   outline: none;
@@ -234,6 +220,13 @@ input.error {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+.badge-list {
+  display: flex;
+  flex-direction: row;
+  min-width: 300px;
+  gap: 15px;
+  padding-top: 10px;
 }
 .badge {
   padding: 4px 10px;
