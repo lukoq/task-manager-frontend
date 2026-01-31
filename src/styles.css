@@ -2,7 +2,7 @@
   --color-primary: #2c3e50;
 
   /* Backgrounds */
-  --color-bg-main: #f7f4f4;
+  --color-bg-main: #fbfbe7;
   --color-bg-sheet: #ffffff;
   --color-bg-hover: #f8f9fa;
   --color-bg-active: #ecf0f1;
@@ -26,7 +26,7 @@
   /*Buttons*/
   --color-btn-blue: #8dc2f4;
   --color-btn-red: #ff7675;
-  --color-btn-green: #2a9f62;
+  --color-btn-green: #27be70;
   --color-btn-light-red: #ffeded;
   --color-btn-light-green: #8cebba;
   --color-btn-disabled: #ccc;
@@ -68,7 +68,7 @@
   /*Buttons*/
   --color-btn-blue: #5b97d0;
   --color-btn-red: #d46666;
-  --color-btn-green: #2a9f62;
+  --color-btn-green: #27be70;
   --color-btn-light-red: #ffeded;
   --color-btn-light-green: #8cebba;
   --color-btn-disabled: #ccc;
