@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (task of sortedTasks(); track task.id) {
+        @for (task of pagedTasks(); track task.id) {
           <tr 
             class="main-row" 
             (click)="toggleTask(task.id)" 
@@ -79,6 +79,17 @@
         }
       </tbody>
     </table>
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="page() === 1">
+        <span class="material-icons btn-prev">keyboard_double_arrow_left</span>
+      </button>
+      <p class="page-info">
+        Page  {{ page() }}  / {{ totalPages() }}
+      </p>
+      <button (click)="nextPage()" [disabled]="page() === totalPages()">
+        <span class="material-icons btn-next">keyboard_double_arrow_right</span>
+      </button>
+    </div>
   </div>
 </div>
 

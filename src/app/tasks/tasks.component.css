@@ -40,7 +40,6 @@ td {
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .main-row:hover {
   background-color: var(--color-bg-hover);
 }
@@ -48,28 +47,27 @@ td {
 .main-row.active {
   background-color: var(--color-bg-active);
 }
-
 .bold { 
   font-weight: bold; 
+  white-space: nowrap; 
+  overflow: hidden;        
+  text-overflow: ellipsis;   
+  max-width: 120px;
 }
-
 .details-row td {
   padding: 0; 
   background-color: var(--color-bg-details);
 }
-
 .details-content {
   padding: 20px;
   border-bottom: 1px solid var(--color-border-normal);
   animation: slideDown 0.3s ease-out;
 }
-
 .actions {
   margin-top: 15px;
   display: flex;
   gap: 10px;
 }
-
 .head {
   cursor: pointer;
   user-select: none;
@@ -77,7 +75,15 @@ td {
   align-items: center; 
   justify-content: flex-start;
 }
-
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-info {
+  font-weight: bold;
+  color: var(--color-btn-newpage);
+}
 
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-10px); }
@@ -88,11 +94,17 @@ td {
 /* Buttons */
 
 button {
+  background-color: transparent;
   justify-content: center;
   padding: 8px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+button:disabled {
+  opacity: 0.2;      
+  cursor: not-allowed;   
+  pointer-events: none;   
 }
 .btn-edit { 
   background: var(--color-btn-blue);
@@ -136,6 +148,20 @@ button {
   opacity: 0.5;      
   cursor: not-allowed;   
   pointer-events: none;   
+}
+.btn-next {
+  color: var(--color-btn-newpage);
+  background-color: transparent;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 36px;
+}
+.btn-prev {
+  color: var(--color-btn-newpage);
+  background-color: transparent;
+  margin-right: auto;
+  cursor: pointer;
+  font-size: 36px;
 }
 /*Modals*/
 

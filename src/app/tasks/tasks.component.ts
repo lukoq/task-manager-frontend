@@ -22,6 +22,8 @@ export class TasksComponent implements OnInit {
   isAddModalOpen = signal(false);
   sortField = signal<keyof Task | null>('id');
   sortDir = signal<'asc' | 'desc'>('asc');
+  page = signal(1);
+  pageSize = signal(20);
 
   readonly statusOptions = ['TODO', 'IN_PROGRESS', 'DONE'];
 
@@ -76,6 +78,18 @@ export class TasksComponent implements OnInit {
 
   toggleTask(id: number) {
     this.expandedTaskId.update(currentId => currentId === id ? null : id);
+  }
+
+  nextPage() {
+    if(this.page() < this.totalPages()) {
+      this.page.update(p => p + 1);
+    }
+  }
+
+  prevPage() {
+    if(this.page() > 1) {
+      this.page.update(p => p - 1);
+    }
   }
 
   toggleDescriptionEdit(event: Event) {
@@ -168,6 +182,7 @@ export class TasksComponent implements OnInit {
     }
   }
   toggleSort(field: keyof Task): void {
+    this.page.set(1);
     if(this.sortField() === field) {
       this.sortDir.set(
         this.sortDir() === 'asc' ? 'desc' : 'asc'
@@ -178,6 +193,8 @@ export class TasksComponent implements OnInit {
       this.sortDir.set('asc');
     }
   }
+
+  /* Computed */
 
   sortedTasks = computed(() => {
     const field = this.sortField();
@@ -202,6 +219,21 @@ export class TasksComponent implements OnInit {
         return 0;
       });
     }
+  });
+
+  pagedTasks = computed(() => {
+    const page = this.page();
+    const size = this.pageSize();
+    const tasks = this.sortedTasks();
+  
+    const start = (page-1) * size;
+    const end = start + size;
+  
+    return tasks.slice(start, end);
+  });
+
+  totalPages = computed(() => {
+    return Math.ceil(this.sortedTasks().length / this.pageSize());
   });
 
 }

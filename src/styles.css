@@ -30,6 +30,7 @@
   --color-btn-light-red: #ffeded;
   --color-btn-light-green: #8cebba;
   --color-btn-disabled: #ccc;
+  --color-btn-newpage: #333333;
 
   /*Badges*/
   --color-bdg-todo: #ffeaa7;
@@ -72,6 +73,7 @@
   --color-btn-light-red: #ffeded;
   --color-btn-light-green: #8cebba;
   --color-btn-disabled: #ccc;
+  --color-btn-newpage: #e6e6e6;
 
   /*Badges*/
   --color-bdg-todo: #e4d5a5;
