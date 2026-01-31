@@ -45,6 +45,7 @@
             class="main-row" 
             (click)="toggleTask(task.id)" 
             [class.active]="expandedTaskId() === task.id"
+            [animate.enter]="'row-enter'"
           >
             <td>#{{ task.id }}</td>
             <td class="bold">{{ task.title }}</td>
