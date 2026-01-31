@@ -1,9 +1,8 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { TaskService } from './task.service';
 import { Task } from './task.model';
-
 
 @Component({
   selector: 'app-tasks',
@@ -21,6 +20,8 @@ export class TasksComponent implements OnInit {
   isEditModalOpen = signal(false);
   isRemoveModalOpen = signal(false);
   isAddModalOpen = signal(false);
+  sortField = signal<keyof Task | null>('id');
+  sortDir = signal<'asc' | 'desc'>('asc');
 
   readonly statusOptions = ['TODO', 'IN_PROGRESS', 'DONE'];
 
@@ -166,5 +167,41 @@ export class TasksComponent implements OnInit {
       });
     }
   }
+  toggleSort(field: keyof Task): void {
+    if(this.sortField() === field) {
+      this.sortDir.set(
+        this.sortDir() === 'asc' ? 'desc' : 'asc'
+      );
+    } 
+    else {
+      this.sortField.set(field);
+      this.sortDir.set('asc');
+    }
+  }
+
+  sortedTasks = computed(() => {
+    const field = this.sortField();
+    const direction = this.sortDir();
+    const tasks = this.tasks();
+    if(!field) {
+      return tasks;
+    }
+    else {
+      return [...tasks].sort((a, b) => {
+        const valueA = a[field];
+        const valueB = b[field];
+        if (valueA == null || valueB == null) {
+          return 0;
+        }
+        if (valueA < valueB) {
+          return direction === 'asc' ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+  });
 
 }

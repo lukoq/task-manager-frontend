@@ -70,6 +70,14 @@ td {
   gap: 10px;
 }
 
+.head {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start;
+}
+
 
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-10px); }
