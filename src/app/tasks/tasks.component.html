@@ -3,6 +3,44 @@
     <button class="btn-action" (click)="openAddModal()">
       Add a new task
     </button>
+    <div>
+      <div class="toggle-filter">
+        <button class="btn-filter" (click)="toggleFilters()">
+          <span class="material-icons sort-icon">
+            {{ showFilters() ? 'expand_less' : 'expand_more' }}
+          </span>
+        </button>
+        <label class="label-filter">Filters</label>
+      </div>
+      <div 
+        class="tasks-filter"
+        [class.is-open]="showFilters()" 
+        [class.is-closed]="wasOpened && !showFilters()">
+        <div class="search-filter">
+          <label class="label-filter">Search for your saved tasks</label>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Your task title..."
+            (input)="onSearch($event)"
+          />
+        </div>
+        <div class="status-filter">
+          <label class="label-filter">Filter by status</label>
+          <div class="badge-list-filter">
+            @for (status of statusOptions; track status) {
+              <button
+                class="badge badge-btn"
+                [attr.data-status]="status"
+              >
+                {{status}}
+              </button>
+            }
+          </div>
+          
+        </div>
+      </div>
+    </div>
     <table>
       <thead>
         <tr>

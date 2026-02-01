@@ -24,8 +24,11 @@ export class TasksComponent implements OnInit {
   sortDir = signal<'asc' | 'desc'>('asc');
   page = signal(1);
   pageSize = signal(20);
+  searchTerm = signal('');
+  showFilters = signal(false);
 
   readonly statusOptions = ['TODO', 'IN_PROGRESS', 'DONE'];
+  wasOpened = false;
 
   taskForm = new FormGroup({
     title: new FormControl('', { 
@@ -90,6 +93,16 @@ export class TasksComponent implements OnInit {
     if(this.page() > 1) {
       this.page.update(p => p - 1);
     }
+  }
+
+  toggleFilters() {
+    this.showFilters.update(v => !v);
+    this.wasOpened = true; 
+  }
+
+  onSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchTerm.set(value);
   }
 
   toggleDescriptionEdit(event: Event) {
