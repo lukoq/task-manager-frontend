@@ -12,8 +12,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('task-manager-frontend');
+  isDarkModeActive = signal(false);
 
   toggleTheme(): void {
+    this.isDarkModeActive() ? this.isDarkModeActive.set(false) : this.isDarkModeActive.set(true);
     document.body.classList.toggle('dark-theme');
   }
 }

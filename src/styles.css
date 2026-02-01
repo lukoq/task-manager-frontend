@@ -46,7 +46,7 @@
 
   /* Backgrounds */
   --color-bg-main: #3a3a3a;
-  --color-bg-sheet: #c6c6c6;
+  --color-bg-sheet: #e7e7e7;
   --color-bg-hover: #b8b8b8;
   --color-bg-active: #b1b1b1;
   --color-bg-details: #dfdfdf;
@@ -88,7 +88,7 @@ body {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--color-bg-main);
   margin: 0;
-  padding: 20px;
+  padding: 0px;
   color: #333;
 }
 

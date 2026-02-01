@@ -1,5 +1,16 @@
-<h1>Task Manager</h1>
-<button (click)="toggleTheme()">
-    Toggle dark mode
+<header class="top-bar">
+  <span class="app-title">TaskManager</span>
+  <button class="theme-toggle" (click)="toggleTheme()">
+    @if(isDarkModeActive()) {
+      <span class="material-icons">
+        light_mode
+      </span>
+    }
+    @else {
+      <span class="material-icons">
+        dark_mode
+      </span>
+    }
   </button>
+</header>
 <router-outlet></router-outlet>
