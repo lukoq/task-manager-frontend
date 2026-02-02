@@ -32,6 +32,8 @@
               <button
                 class="badge badge-btn"
                 [attr.data-status]="status"
+                (click)="onStatusFilter(status)"
+                [class.selected]="selectedStatus() === status"
               >
                 {{status}}
               </button>

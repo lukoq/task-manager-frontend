@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, effect } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { TaskService } from './task.service';
@@ -26,8 +26,15 @@ export class TasksComponent implements OnInit {
   pageSize = signal(20);
   searchTerm = signal('');
   showFilters = signal(false);
+  selectedStatus = signal<string | null>(null);
+
 
   readonly statusOptions = ['TODO', 'IN_PROGRESS', 'DONE'];
+  readonly resetPageEffect = effect(() => {
+    this.selectedStatus();
+    this.searchTerm();
+    this.page.set(1);
+  });
   wasOpened = false;
 
   taskForm = new FormGroup({
@@ -103,6 +110,12 @@ export class TasksComponent implements OnInit {
   onSearch(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.searchTerm.set(value);
+  }
+
+  onStatusFilter(status: string): void {
+    this.selectedStatus.set(
+      this.selectedStatus() === status ? null : status
+    );
   }
 
   toggleDescriptionEdit(event: Event) {
@@ -212,7 +225,7 @@ export class TasksComponent implements OnInit {
   sortedTasks = computed(() => {
     const field = this.sortField();
     const direction = this.sortDir();
-    const tasks = this.tasks();
+    const tasks = this.filteredTasks();
     if(!field) {
       return tasks;
     }
@@ -247,6 +260,19 @@ export class TasksComponent implements OnInit {
 
   totalPages = computed(() => {
     return Math.ceil(this.sortedTasks().length / this.pageSize());
+  });
+
+  filteredTasks = computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    const tasks = this.tasks();
+    const status = this.selectedStatus();
+  
+    return tasks.filter(task => {
+      const matchesSearch = !term || task.title.toLowerCase().includes(term); 
+      const matchesStatus = !status || task.status === status;
+  
+      return matchesSearch && matchesStatus;
+    });
   });
 
 }
