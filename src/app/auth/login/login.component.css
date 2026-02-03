@@ -1,0 +1,74 @@
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 80px 80px;
+}
+.sheet {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: var(--color-bg-sheet);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    min-width: 500px;
+    justify-content: center;
+}
+h2 {
+    color: var(--color-text-primary);
+    padding: 10px;
+}
+p {
+    align-self: center;
+    padding: 20px;
+}
+
+/* Inputs */
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid var(--color-bg-input);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: none;
+}
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-text-focus);
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
+}
+input.error {
+    border-color: var(--color-text-error);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-inline: 40px;
+}
+
+
+/* buttons */
+
+button {
+    background-color: transparent;
+    justify-content: center;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:disabled {
+    opacity: 0.2;      
+    cursor: not-allowed;   
+    pointer-events: none;   
+}
+.btn-login {
+    padding: 10px 20px;
+    background-color: var(--color-btn-green);
+    color: var(--color-text-white);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
