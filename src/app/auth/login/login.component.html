@@ -2,11 +2,11 @@
     <div class="center-wrapper">
       <div class="sheet">
         <h2>Sign in to check out <br> your today's tasks.</h2>
-        <form class='login-form'>
-          <input class="username" type="text" placeholder="Username" />
-          <input type="password" placeholder="Password" />
+        <form class='login-form' [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <input class="username" type="text" placeholder="Email" formControlName="email"/>
+          <input type="password" placeholder="Password" formControlName="password" />
       
-          <button class="btn-login" type="submit">Sign in</button>
+          <button class="btn-login" type="submit" [disabled]="loginForm.invalid">Sign in</button>
         </form>
         <p>
           Don't have an account? 
