@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  private router = inject(Router);
   private loginService = inject(LoginService);
 
   loginForm = new FormGroup({
@@ -31,9 +32,10 @@ export class LoginComponent {
       
       this.loginService.login(credentials).subscribe({
         next: () => {
-          console.log('Zalogowano!');
+          console.log('Logged!');
+          this.router.navigate(['/tasks']);
         },
-        error: (err) => console.error('Błąd:', err)
+        error: (err) => console.error('Error:', err)
       });
     }
   }

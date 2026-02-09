@@ -20,6 +20,12 @@
     cursor: pointer;
     color: var(--color-text-white);
 }
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-white);
+}
 .app-content {
     padding-top: 0px;
-  }
+}
