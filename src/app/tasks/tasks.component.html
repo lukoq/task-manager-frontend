@@ -204,6 +204,9 @@
     <div class="modal-add-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h3>Add a new task</h3>
+        <button>
+          <span class="material-icons btn-close">close</span>
+        </button>
       </div>
       <div>
         <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
