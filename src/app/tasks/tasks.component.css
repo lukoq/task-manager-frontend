@@ -253,7 +253,7 @@ button:disabled {
   color: var(--color-text-label)
 }
 .btn-close {
-  font-size: 30px;
+  font-size: 24px;
 }
 /*Modals*/
 

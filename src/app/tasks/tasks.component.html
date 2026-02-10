@@ -139,6 +139,9 @@
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h3>#{{ taskToEdit()?.id }} Edit your task</h3>
+        <button (click)="closeEditModal()">
+          <span class="material-icons btn-close">close</span>
+        </button>
       </div>
       <form [formGroup]="newDescriptionForm" class="modal-body">
         <div class="badge-list">
@@ -204,7 +207,7 @@
     <div class="modal-add-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h3>Add a new task</h3>
-        <button>
+        <button (click)="closeAddModal()">
           <span class="material-icons btn-close">close</span>
         </button>
       </div>
