@@ -64,6 +64,7 @@ export class TasksComponent implements OnInit {
   }
 
   openRemoveModal(task: Task) {
+    this.taskToEdit.set({ ...task }); //copy
     this.isRemoveModalOpen.set(true);
   }
 
