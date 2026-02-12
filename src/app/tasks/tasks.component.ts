@@ -45,7 +45,8 @@ export class TasksComponent implements OnInit {
     description: new FormControl('', { 
       nonNullable: true 
     }),
-    status: new FormControl('TODO', { nonNullable: true })
+    status: new FormControl('TODO', { nonNullable: true }),
+    dueDate: new FormControl({ value: null, disabled: true })
   });
 
   newDescriptionForm = new FormGroup({
@@ -70,6 +71,7 @@ export class TasksComponent implements OnInit {
 
   openAddModal() {
     this.isAddModalOpen.set(true);
+    this.taskForm.get('dueDate')?.disable();
   }
 
   closeEditModal() {
@@ -123,6 +125,21 @@ export class TasksComponent implements OnInit {
     const isChecked = (event.target as HTMLInputElement).checked;
     const descControl = this.newDescriptionForm.get('description');
     isChecked ? descControl?.enable() : descControl?.disable();
+  }
+  toggleAddDueDate(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    const dateControl = this.taskForm.get('dueDate');
+  
+    if (isChecked) {
+      dateControl?.enable();
+      if (!dateControl?.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateControl?.setValue(today as any);
+      }
+    } else {
+      dateControl?.setValue(null);
+      dateControl?.disable();
+    }
   }
 
   ngOnInit(): void {

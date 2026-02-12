@@ -230,6 +230,19 @@
               rows="4" 
               placeholder="What to do?"></textarea>
           </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" (change)="toggleAddDueDate($event)"/>
+              Deadline
+            </label>
+            <input 
+              #dateInput
+              id="dueDate" 
+              type="date" 
+              formControlName="dueDate"
+              [class.error]="taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched"
+              (click)="dateInput.showPicker()">
+          </div>
 
           <div class="modal-footer">
             <button type="button" class="btn-cancel-outlined" (click)="closeAddModal()">Cancel</button>

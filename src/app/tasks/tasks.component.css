@@ -377,3 +377,11 @@ input.error {
   font-weight: bold;
   border: 2px solid currentColor;
 }
+
+
+input[type="date"] {
+  cursor: pointer;
+  font-family: inherit;
+  color: #333;
+  border-radius: 5px;
+}
