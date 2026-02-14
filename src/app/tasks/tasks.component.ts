@@ -200,7 +200,8 @@ export class TasksComponent implements OnInit {
   loadTasks() {
     this.taskService.getTasks().subscribe({
       next: (data) => {
-        this.tasks.set(data); 
+        this.tasks.set(data);
+        console.log(data)
       },
       error: (err) => console.error('err', err)
     });
@@ -215,7 +216,8 @@ export class TasksComponent implements OnInit {
           this.taskForm.reset({ 
             title: '', 
             description: '', 
-            status: 'TODO' 
+            status: 'TODO',
+            dueDate: null,
           });
           this.closeAddModal(); 
         },
@@ -235,6 +237,31 @@ export class TasksComponent implements OnInit {
     else {
       this.sortField.set(field);
       this.sortDir.set('asc');
+    }
+  }
+
+  calculateDeadline(dueDate: string): string {
+    if (!dueDate) {
+      return ''; 
+    }
+  
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+  
+    const deadline = new Date(dueDate);
+    deadline.setHours(0, 0, 0, 0);
+  
+    const diffTime = deadline.getTime() - today.getTime();
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) 
+      return 'Today';
+    if (diffDays === 1) 
+      return 'Tomorrow';
+    if (diffDays > 0) {
+      return `${diffDays} days left`;
+    } else {
+      return 'After the deadline';
     }
   }
 
@@ -292,5 +319,6 @@ export class TasksComponent implements OnInit {
       return matchesSearch && matchesStatus;
     });
   });
+
 
 }

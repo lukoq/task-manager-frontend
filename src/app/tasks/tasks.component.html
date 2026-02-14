@@ -103,8 +103,11 @@
             <tr class="details-row">
               <td colspan="4">
                 <div class="details-content">
+                  @if (task.dueDate) {
+                    <p><strong>Due date: {{ calculateDeadline(task.dueDate) }}</strong>, until {{ task.dueDate }}</p>
+                  }
                   <p><strong>Description:</strong> {{ task.description }}</p>
-                  <p><strong>Date:</strong> {{ task.createdAt | date:'short' }}</p>
+                  <p>Created at: {{ task.createdAt | date:'short' }}</p>
                   <div class="actions">
                     <button class="btn-edit" (click)="openEditModal(task)">
                       Edit
