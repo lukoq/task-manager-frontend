@@ -1,6 +1,20 @@
 <header class="top-bar">
-  <span class="app-title">TaskManager</span>
-  <div class="actions">
+  <div class="nav-bar">
+    <span class="app-title">TaskManager</span>
+      @if (loginService.isLoggedIn | async) {
+      <nav class="nav-links">
+        <a routerLink="/tasks" routerLinkActive="active-link">
+          <span class="material-icons">assignment</span>
+          <span class="app-page">Tasks</span>
+        </a>
+        <a routerLink="/statistics" routerLinkActive="active-link">
+          <span class="material-icons">bar_chart</span>
+          <span class="app-page">Stats</span>
+        </a>
+      </nav>
+      }
+  </div>
+  <div class="quick-actions">
     @if (loginService.isLoggedIn | async) {
       <button class="logout-btn" (click)="loginService.logout()">
         <span class="material-icons">logout</span>

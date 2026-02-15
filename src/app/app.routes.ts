@@ -10,6 +10,11 @@ export const routes: Routes = [
         component: TasksComponent,
         canActivate: [authGuard]
     },
+    { 
+        path: 'statistics', 
+        component: TasksComponent,
+        canActivate: [authGuard]
+    },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
