@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { LoginService } from './auth/login/login.service';
 import { AsyncPipe } from '@angular/common';
 
@@ -8,7 +8,8 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   imports: [
     RouterOutlet,
-    AsyncPipe
+    AsyncPipe,
+    RouterLink
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
