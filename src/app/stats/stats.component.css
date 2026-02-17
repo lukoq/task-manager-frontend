@@ -1,0 +1,91 @@
+.stats-container {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.summary-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    padding: 40px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
+}
+
+.card.overdue.danger {
+    border: 2px solid var(--color-text-error);
+    color: var(--color-text-error);
+}
+
+.value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-btn-newpage);
+}
+
+
+.chart-section {
+    padding: 20px;
+    padding-top: 5px;
+    border-radius: 16px;
+
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
+}
+
+.bar-chart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end; 
+    height: 250px; 
+    padding-top: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+    height: 100%; 
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    transition: height 0.5s ease-out; 
+}
+
+.bar-value {
+    position: absolute;
+    top: -25px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.bar-label {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.label {
+    color: var(--color-text-secondary);
+}
+
+.todo { background-color: var(--color-bdg-todo); }
+.in-progress { background-color: var(--color-bdg-inprogress); }
+.done { background-color: var(--color-bdg-done); }

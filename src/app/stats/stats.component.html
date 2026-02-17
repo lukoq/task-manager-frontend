@@ -1,1 +1,40 @@
-<div></div>
+<div class="stats-container" >
+    @if(stats(); as s) {
+    <div class="summary-cards">
+      <div class="card total">
+        <span class="label">Total Tasks</span>
+        <span class="value">{{ s.total }}</span>
+      </div>
+      <div class="card overdue" [class.danger]="s.overdue > 0">
+        <span class="label">Overdue</span>
+        <span class="value">{{ s.overdue }}</span>
+      </div>
+    </div>
+  
+    <div class="chart-section">
+      <span class="label">Your task statuses</span>
+      <div class="bar-chart">
+        <div class="bar-wrapper">
+          <div class="bar todo" [style.height.%]="chartData().todo">
+            <span class="bar-value">{{ s.todo }}</span>
+          </div>
+          <span class="bar-label">To Do</span>
+        </div>
+  
+        <div class="bar-wrapper">
+          <div class="bar in-progress" [style.height.%]="chartData().inProgress">
+            <span class="bar-value">{{ s.inProgress }}</span>
+          </div>
+          <span class="bar-label">In Progress</span>
+        </div>
+  
+        <div class="bar-wrapper">
+          <div class="bar done" [style.height.%]="chartData().done">
+            <span class="bar-value">{{ s.done }}</span>
+          </div>
+          <span class="bar-label">Done</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
