@@ -40,6 +40,10 @@
   --color-bdg-todo-content: #d35400;
   --color-bdg-inprogress-content: #4858a9;
   --color-bdg-done-content: #2a9f62;
+
+
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --card-border: 1px solid transparent; 
 }
 
 .dark-theme {
@@ -84,6 +88,10 @@
   --color-bdg-todo-content: #d35400;
   --color-bdg-inprogress-content: #4858a9;
   --color-bdg-done-content: #2a9f62;
+
+
+  --card-shadow: none; 
+  --card-border: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
 body {
