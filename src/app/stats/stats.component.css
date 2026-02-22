@@ -36,10 +36,8 @@
 
 
 .chart-section {
-    padding: 20px;
-    padding-top: 5px;
     border-radius: 16px;
-
+    padding: 20px;
     box-shadow: var(--card-shadow);
     border: var(--card-border);
     background-color: rgb(from var(--color-primary) r g b / 0.1);
@@ -89,9 +87,36 @@
     color: var(--color-text-secondary);
 }
 
+.pie-chart {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    position: relative;
+}
+
+.pie-inner-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+
 .todo { background-color: var(--color-bdg-todo); }
 .in-progress { background-color: var(--color-bdg-inprogress); }
 .done { background-color: var(--color-bdg-done); }
+.percent-label { font-size: 2rem; font-weight: bold; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+.dot.overdue { background: var(--color-text-error) }
+.dot.rest { background: var(--color-bdg-todo) }
+.dot.done { background: var(--color-bdg-done) }
 
 
 
@@ -103,3 +128,4 @@
         transform: scaleY(1); 
     }
 }
+

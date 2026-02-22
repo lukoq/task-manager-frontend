@@ -36,5 +36,38 @@
         </div>
       </div>
     </div>
+    <div class="chart-section">
+      <div class="pie-container">
+        <span class="label">Status Split</span>
+        <div class="pie-chart" [style.background]="pieStyle()">
+
+          @for (item of statsRate(); track item.label) {
+            <div class="pie-label">
+              <div class="pie-inner-circle">
+                <span class="percent-label"> {{ item.value }}%</span>
+                <span class="sub-label">{{ item.label }}</span>
+              </div>
+            </div>
+          }
+        </div>
+        
+        <div class="legend">
+          <div class="item">
+            <span class="dot overdue"></span>
+            <span class="label">Overdue</span>
+          </div>
+          <div class="item">
+            <span class="dot done"></span>
+            <span class="label">Done</span>
+          </div>
+          <div class="item">
+            <span class="dot rest"></span>
+            <span class="label">Rest</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     }
   </div>

@@ -45,6 +45,41 @@ export class StatsComponent {
       done: (s.done/s.total)*100
     };
   });
+  pieStyle = computed(() => {
+    const s = this.stats();
+    if(!s || s.total === 0) {
+      return 'transparent';
+    }
+  
+    const doneP = (s.done / s.total) * 100;
+    const overdueP = (s.overdue / s.total) * 100;
+
+    return `conic-gradient(
+      var(--color-bdg-done) 0% ${doneP}%,
+      var(--color-text-error) ${doneP}% ${doneP + overdueP}%,
+      var(--color-bdg-todo) ${doneP + overdueP}% 100%
+    )`;
+  });
+  
+  completionRate = computed(() => {
+    const s = this.stats();
+    return s && s.total > 0 ? Math.round((s.done / s.total) * 100) : 0;
+  });
+  
+  statsRate = computed(() => {
+    const s = this.stats();
+    if (!s || s.total === 0) return [];
+  
+    const doneP = (s.done / s.total) * 100;
+    const overdueP = (s.overdue / s.total) * 100;
+    const restP = 100 - doneP - overdueP;
+  
+    return [
+      { label: 'Done', value: Math.round(doneP), color: 'var(--color-done)', start: 0 },
+      { label: 'Overdue', value: Math.round(overdueP), color: 'var(--color-overdue)', start: doneP },
+      { label: 'Rest', value: Math.round(restP), color: 'var(--color-todo)', start: doneP + overdueP }
+    ];
+  });
 
 
 }
