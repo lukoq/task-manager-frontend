@@ -103,6 +103,7 @@
             <tr class="details-row">
               <td colspan="4">
                 <div class="details-content">
+                  <p><strong>Title: {{ task.title }}</strong></p>
                   @if (task.dueDate) {
                     <p><strong>Due date: {{ calculateDeadline(task.dueDate) }}</strong>, until {{ task.dueDate }}</p>
                   }
