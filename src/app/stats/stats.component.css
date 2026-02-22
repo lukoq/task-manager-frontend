@@ -66,7 +66,8 @@
     width: 100%;
     border-radius: 8px 8px 0 0;
     position: relative;
-    transition: height 0.5s ease-out; 
+    transform-origin: bottom;
+    animation: growUp 0.2s ease-out forwards;
 }
 
 .bar-value {
@@ -91,3 +92,14 @@
 .todo { background-color: var(--color-bdg-todo); }
 .in-progress { background-color: var(--color-bdg-inprogress); }
 .done { background-color: var(--color-bdg-done); }
+
+
+
+@keyframes growUp {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1); 
+    }
+}
