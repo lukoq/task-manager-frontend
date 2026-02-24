@@ -1,6 +1,6 @@
 <div class="stats-container" >
     @if(stats(); as s) {
-    <div class="summary-cards">
+    <div class="summary-cards-container">
       <div class="card total">
         <span class="label">Total Tasks</span>
         <span class="value">{{ s.total }}</span>
@@ -10,59 +10,60 @@
         <span class="value">{{ s.overdue }}</span>
       </div>
     </div>
-  
-    <div class="chart-section">
-      <span class="label">Your task statuses</span>
-      <div class="bar-chart">
-        <div class="bar-wrapper">
-          <div class="bar todo" [style.height.%]="chartData().todo">
-            <span class="bar-value">{{ s.todo }}</span>
+    <div class="charts-container">
+      <div class="chart-section">
+        <span class="label">Your task statuses</span>
+        <div class="bar-chart">
+          <div class="bar-wrapper">
+            <div class="bar todo" [style.height.%]="chartData().todo">
+              <span class="bar-value">{{ s.todo }}</span>
+            </div>
+            <span class="bar-label">To Do</span>
           </div>
-          <span class="bar-label">To Do</span>
-        </div>
-  
-        <div class="bar-wrapper">
-          <div class="bar in-progress" [style.height.%]="chartData().inProgress">
-            <span class="bar-value">{{ s.inProgress }}</span>
+    
+          <div class="bar-wrapper">
+            <div class="bar in-progress" [style.height.%]="chartData().inProgress">
+              <span class="bar-value">{{ s.inProgress }}</span>
+            </div>
+            <span class="bar-label">In Progress</span>
           </div>
-          <span class="bar-label">In Progress</span>
-        </div>
-  
-        <div class="bar-wrapper">
-          <div class="bar done" [style.height.%]="chartData().done">
-            <span class="bar-value">{{ s.done }}</span>
+    
+          <div class="bar-wrapper">
+            <div class="bar done" [style.height.%]="chartData().done">
+              <span class="bar-value">{{ s.done }}</span>
+            </div>
+            <span class="bar-label">Done</span>
           </div>
-          <span class="bar-label">Done</span>
         </div>
       </div>
-    </div>
-    <div class="chart-section">
-      <div class="pie-container">
-        <span class="label">Status Split</span>
-        <div class="pie-chart" [style.background]="pieStyle()">
+      <div class="chart-section">
+        <div class="pie-container">
+          <span class="label">Effectiveness</span>
+          <div class="pie-chart" [style.background]="pieStyle()">
 
-          @for (item of statsRate(); track item.label) {
-            <div class="pie-label">
-              <div class="pie-inner-circle">
-                <span class="percent-label"> {{ item.value }}%</span>
-                <span class="sub-label">{{ item.label }}</span>
+            @for (item of statsRate(); track item.label) {
+              <div class="pie-label" [style.transform]="item.transform">
+                <div class="pie-inner-circle">
+                  <span class="percent-label"> {{ item.value }}%</span>
+                  <span class="sub-label">{{ item.label }}</span>
+                </div>
               </div>
+            }
+          </div>
+          
+          <div class="legend">
+            <div class="item">
+              <span class="dot overdue"></span>
+              <span class="label">Overdue</span>
             </div>
-          }
-        </div>
-        
-        <div class="legend">
-          <div class="item">
-            <span class="dot overdue"></span>
-            <span class="label">Overdue</span>
-          </div>
-          <div class="item">
-            <span class="dot done"></span>
-            <span class="label">Done</span>
-          </div>
-          <div class="item">
-            <span class="dot rest"></span>
-            <span class="label">Rest</span>
+            <div class="item">
+              <span class="dot done"></span>
+              <span class="label">Done</span>
+            </div>
+            <div class="item">
+              <span class="dot others"></span>
+              <span class="label">Others</span>
+            </div>
           </div>
         </div>
       </div>

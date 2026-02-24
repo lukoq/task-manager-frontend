@@ -61,11 +61,6 @@ export class StatsComponent {
     )`;
   });
   
-  completionRate = computed(() => {
-    const s = this.stats();
-    return s && s.total > 0 ? Math.round((s.done / s.total) * 100) : 0;
-  });
-  
   statsRate = computed(() => {
     const s = this.stats();
     if (!s || s.total === 0) return [];
@@ -73,13 +68,40 @@ export class StatsComponent {
     const doneP = (s.done / s.total) * 100;
     const overdueP = (s.overdue / s.total) * 100;
     const restP = 100 - doneP - overdueP;
+
+    const r = '150px'; 
+
+    const getTransform = (start: number, value: number) => {
+      const mid = start + (value / 2);
+      const deg = mid * 3.6;
+      return `translate(-50%, -50%) rotate(${deg}deg) translateY(-${r}) rotate(-${deg}deg)`;
+    };
   
     return [
-      { label: 'Done', value: Math.round(doneP), color: 'var(--color-done)', start: 0 },
-      { label: 'Overdue', value: Math.round(overdueP), color: 'var(--color-overdue)', start: doneP },
-      { label: 'Rest', value: Math.round(restP), color: 'var(--color-todo)', start: doneP + overdueP }
-    ];
+    { 
+      label: 'Done', 
+      value: Math.round(doneP), 
+      color: 'var(--color-done)', 
+      start: 0, 
+      transform: getTransform(0, doneP) 
+    },
+    { 
+      label: 'Overdue', 
+      value: Math.round(overdueP), 
+      color: 'var(--color-overdue)', 
+      start: doneP, 
+      transform: getTransform(doneP, overdueP) 
+    },
+    { 
+      label: 'Rest', 
+      value: Math.round(restP), 
+      color: 'var(--color-todo)', 
+      start: doneP + overdueP, 
+      transform: getTransform(doneP + overdueP, restP) 
+    }
+  ];
   });
+
 
 
 }
