@@ -40,7 +40,9 @@
         
         <div class="modal-header">
           <h3>Change your password</h3>
-          <button class="close-btn" (click)="closeChangeModal()">&times;</button>
+          <button (click)="closeChangeModal()">
+            <span class="material-icons btn-close">close</span>
+          </button>
         </div>
   
         <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
@@ -108,8 +110,10 @@
                   }
                 </button>
               </div>
-          </div>
-  
+              @if (changePasswordForm.controls.repeatNewPassword.hasError('passwordsMismatch') && changePasswordForm.controls.repeatNewPassword.touched) {
+                <small class="error-text">Passwords are not the same</small>
+              }
+            </div>
           <div class="modal-actions">
             <button type="button" class="btn-cancel-outlined" (click)="closeChangeModal()">Cancel</button>
             <button type="submit" class="btn-save" [disabled]="changePasswordForm.invalid">Save</button>

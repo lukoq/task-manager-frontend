@@ -1,6 +1,20 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
+
+
+export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  
+  const formGroup = control.parent;
+  if(!formGroup) {
+    return null;
+  } 
+
+  const newPassword = formGroup.get('newPassword')?.value;
+  const repeatPassword = control.value;
+
+  return newPassword === repeatPassword ? null : { passwordsMismatch: true };
+};
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -26,7 +40,7 @@ export class ProfileComponent {
     }),
     repeatNewPassword: new FormControl('', { 
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(5)] 
+      validators: [Validators.required, Validators.minLength(5), passwordMatchValidator] 
     }),
   });
 
