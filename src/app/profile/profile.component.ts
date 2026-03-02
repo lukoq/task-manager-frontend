@@ -11,6 +11,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class ProfileComponent {
   isChangeModalOpen = signal(false);
 
+  showOldPassword = signal(false);
+  showNewPassword = signal(false);
+  showRepeatPassword = signal(false);
+
   changePasswordForm = new FormGroup({
     oldPassword: new FormControl('', { 
       nonNullable: true, 
@@ -27,6 +31,19 @@ export class ProfileComponent {
   });
 
 
+  toggleVisibility(field: 'old' | 'new' | 'repeat') {
+    if(field === 'old') {
+      this.showOldPassword.update(v => !v);
+    }
+    if(field === 'new') {
+      this.showNewPassword.update(v => !v);
+    }
+    if(field === 'repeat') {
+      this.showRepeatPassword.update(v => !v);
+    }
+  }
+
+
   openChangeModal() {
     this.isChangeModalOpen.set(true);
   }
@@ -34,6 +51,10 @@ export class ProfileComponent {
   closeChangeModal() {
     this.isChangeModalOpen.set(false);
     this.changePasswordForm.reset(); 
+
+    this.showOldPassword.set(false);
+    this.showNewPassword.set(false);
+    this.showRepeatPassword.set(false);
   }
 
   onSubmit() {

@@ -62,12 +62,40 @@ button {
 .btn-changeapassword { 
     background: var(--color-btn-green);
     color: var(--color-text-white);
-  }
+}
+.btn-save {
+  background: var(--color-btn-green);
+  color: var(--color-text-white);
+  transition: all 0.3s ease;
+}
+.btn-save:disabled {
+  opacity: 0.5;      
+  cursor: not-allowed;   
+  pointer-events: none;   
+}
+.btn-cancel-outlined { 
+  border: 1px solid var(--color-btn-red);
+  background-color: var(--color-bg-sheet);
+  color: var(--color-btn-red);
+}
+.btn-showPswrd {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  user-select: none;
+}
 
-
-
-
-
+.btn-showPswrd:hover {
+  color: #000;
+}
 
   .modal-overlay {
     position: fixed;
@@ -81,15 +109,14 @@ button {
     align-items: center;
     z-index: 1000;
   }
-  
-  /* Okno modalu */
+
   .modal-container {
-    background: white;
-    padding: 24px;
+    background: var(--color-bg-modal);
+    padding: 20px;
     border-radius: 15px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--card-shadow)
   }
   
   .modal-header {
@@ -108,7 +135,7 @@ button {
   }
   
   .error-text {
-    color: #dc3545;
+    color: var(--color-text-error);
     font-size: 12px;
     margin-top: 4px;
   }
@@ -141,4 +168,14 @@ button {
   }
   input.error {
     border-color: var(--color-text-error);
+  }
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Miejsce na przycisk */
   }
