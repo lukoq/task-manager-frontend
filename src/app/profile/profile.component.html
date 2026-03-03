@@ -1,4 +1,5 @@
 <div class="info-container" >
+  @if(profile(); as p) {
     <div class="summary-cards-container">
         <div class="card picture">
             <div class="text">
@@ -11,13 +12,13 @@
       <div class="card">
         <div class="text">
             <span class="label">Username</span>
-            <span class="value">yournick2026</span>
+            <span class="value">{{p.username}}</span>
         </div>
       </div>
       <div class="card">
         <div class="text">
             <span class="label">Email</span>
-            <span class="value">youremail@test.com</span>
+            <span class="value">{{p.email}}</span>
         </div>
       </div>
       <div class="card">
@@ -32,6 +33,7 @@
         </div>
       </div>
     </div>
+    }
   </div>
 
   @if (isChangeModalOpen()) {
@@ -58,10 +60,10 @@
               >
               <button type="button" class="btn-showPswrd" (click)="toggleVisibility('old')">
                 @if (showOldPassword()) {
-                  <span class="material-icons">visibility</span>
+                  <span class="material-icons">visibility_off</span>
                 } 
                 @else {
-                  <span class="material-icons">visibility_off</span>
+                  <span class="material-icons">visibility</span>
                 }
               </button>
             </div>
@@ -79,10 +81,10 @@
               >
               <button type="button" class="btn-showPswrd" (click)="toggleVisibility('new')">
                 @if (showNewPassword()) {
-                  <span class="material-icons">visibility</span>
+                  <span class="material-icons">visibility_off</span>
                 } 
                 @else {
-                  <span class="material-icons">visibility_off</span>
+                  <span class="material-icons">visibility</span>
                 }
               </button>
             </div>
@@ -103,10 +105,10 @@
                 >
                 <button type="button" class="btn-showPswrd" (click)="toggleVisibility('repeat')">
                   @if (showRepeatPassword()) {
-                    <span class="material-icons">visibility</span>
+                    <span class="material-icons">visibility_off</span>
                   } 
                   @else {
-                    <span class="material-icons">visibility_off</span>
+                    <span class="material-icons">visibility</span>
                   }
                 </button>
               </div>

@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-
-
+import { Profile } from './profile.model';
+import { ProfileService } from './profile.service';
 
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   
@@ -28,6 +28,10 @@ export class ProfileComponent {
   showOldPassword = signal(false);
   showNewPassword = signal(false);
   showRepeatPassword = signal(false);
+
+  profile = signal<Profile | null>(null);
+
+  private profileService = inject(ProfileService);
 
   changePasswordForm = new FormGroup({
     oldPassword: new FormControl('', { 
@@ -79,6 +83,19 @@ export class ProfileComponent {
     else {
       this.changePasswordForm.markAllAsTouched();
     }
+  }
+
+  ngOnInit(): void {
+    this.loadProfileInfo();
+  }
+
+  loadProfileInfo() {
+    this.profileService.getProfileInfo().subscribe({
+      next: (data) => {
+        this.profile.set(data);
+      },
+      error: (err) => console.error('err', err)
+    });
   }
 
 }
