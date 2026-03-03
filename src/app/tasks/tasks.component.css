@@ -299,6 +299,7 @@ button:disabled {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding-top: 10px;
 }
 .modal-footer.full-width {
   padding: 15px;
