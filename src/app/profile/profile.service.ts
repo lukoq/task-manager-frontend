@@ -8,9 +8,9 @@ import { Profile } from './profile.model';
 })
 export class ProfileService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/tasks'; //Proxy
+  private apiUrl = 'http://localhost:8080/api/users'; //Proxy
 
   getProfileInfo(): Observable<Profile> {
-    return this.http.get<Profile>(`${this.apiUrl}/profile`);
+    return this.http.get<Profile>(`${this.apiUrl}/me`);
   }
 }
