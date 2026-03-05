@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Profile } from './profile.model';
 import { ProfileService } from './profile.service';
+import { finalize } from 'rxjs';
 
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   
@@ -32,6 +33,8 @@ export class ProfileComponent {
   profile = signal<Profile | null>(null);
 
   private profileService = inject(ProfileService);
+
+  isLoading = false;
 
   changePasswordForm = new FormGroup({
     oldPassword: new FormControl('', { 
@@ -76,15 +79,26 @@ export class ProfileComponent {
   }
 
   onSubmit() {
-    if(this.changePasswordForm.valid) {
-      const formData = this.changePasswordForm.getRawValue();
-      this.closeChangeModal(); 
+    if (this.changePasswordForm.valid) {
+      this.isLoading = true; 
+
+      const {oldPassword, newPassword} = this.changePasswordForm.getRawValue();
+
+      this.profileService.changePassword(oldPassword, newPassword).pipe(finalize(() => this.isLoading = false))
+        .subscribe({
+          next: (res) => {
+            this.changePasswordForm.reset();
+            setTimeout(() => this.closeChangeModal(), 2000);
+          },
+          error: (err) => console.error(err)
+        });
     } 
     else {
       this.changePasswordForm.markAllAsTouched();
     }
   }
 
+  
   ngOnInit(): void {
     this.loadProfileInfo();
   }

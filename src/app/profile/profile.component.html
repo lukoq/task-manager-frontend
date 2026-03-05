@@ -118,10 +118,18 @@
             </div>
           <div class="modal-actions">
             <button type="button" class="btn-cancel-outlined" (click)="closeChangeModal()">Cancel</button>
-            <button type="submit" class="btn-save" [disabled]="changePasswordForm.invalid">Save</button>
+            <button type="submit" class="btn-save" [disabled]="changePasswordForm.invalid">
+              @if (isLoading) {
+                <span class="spinner"></span>
+                <span>Saving...</span>
+              } @else {
+                Save
+              }
+            </button>
           </div>
         </form>
   
       </div>
     </div>
   }
+

@@ -13,4 +13,8 @@ export class ProfileService {
   getProfileInfo(): Observable<Profile> {
     return this.http.get<Profile>(`${this.apiUrl}/me`);
   }
+
+  changePassword(oldPassword: string, newPassword: string): Observable<string> {
+    return this.http.post(`${this.apiUrl}/change-password`, {oldPassword, newPassword}, {responseType: 'text' });
+  }
 }
