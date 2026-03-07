@@ -88,7 +88,7 @@ export class ProfileComponent {
         .subscribe({
           next: (res) => {
             this.changePasswordForm.reset();
-            setTimeout(() => this.closeChangeModal(), 2000);
+            setTimeout(() => this.closeChangeModal(), 500);
           },
           error: (err) => console.error(err)
         });
