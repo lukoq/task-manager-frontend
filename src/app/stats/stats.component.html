@@ -42,12 +42,14 @@
           <div class="pie-chart" [style.background]="pieStyle()">
 
             @for (item of statsRate(); track item.label) {
+              @if (item.value !== 0) {
               <div class="pie-label" [style.transform]="item.transform">
                 <div class="pie-inner-circle">
                   <span class="percent-label"> {{ item.value }}%</span>
                   <span class="sub-label">{{ item.label }}</span>
                 </div>
               </div>
+              }
             }
           </div>
           
