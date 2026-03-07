@@ -1,3 +1,8 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 120dvh; 
+  }
 .top-bar {
     height: 56px;
     display: flex;
@@ -30,7 +35,9 @@
     color: var(--color-text-white);
 }
 .app-content {
+    flex: 1;
     padding-top: 0px;
+    padding-bottom: 100px;
 }
 .nav-bar {
     display: flex;
@@ -57,4 +64,37 @@
     opacity: 1;
     background-color: rgba(255, 255, 255, 0.1);
     transform: translateY(-1px);
+}
+.logo-link {
+    display: flex;      
+    align-items: center;   
+    text-decoration: none; 
+    color: inherit;          
+}
+.footer {
+    background-color: var(--color-secondary);
+    border-top: 1px solid var(--card-border);
+    padding: 20px 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 20px;
+}
+
+.footer-links a {
+    margin-left: 20px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+    opacity: 0.7;
 }

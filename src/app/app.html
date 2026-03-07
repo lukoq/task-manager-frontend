@@ -1,43 +1,58 @@
-<header class="top-bar">
-  <div class="nav-bar">
-    <span class="app-title">TaskManager</span>
+<div class="app-container">
+  <header class="top-bar">
+    <div class="nav-bar">
+      <a routerLink="/tasks" class="logo-link" routerLinkActive="active-link">
+        <span class="app-title">TaskManager</span>
+      </a>
+        @if (loginService.isLoggedIn | async) {
+        <nav class="nav-links">
+          <a routerLink="/tasks" routerLinkActive="active-link">
+            <span class="material-icons">assignment</span>
+            <span class="app-page">Tasks</span>
+          </a>
+          <a routerLink="/statistics" routerLinkActive="active-link">
+            <span class="material-icons">bar_chart</span>
+            <span class="app-page">Stats</span>
+          </a>
+          <a routerLink="/profile" routerLinkActive="active-link">
+            <span class="material-icons">person</span>
+            <span class="app-page">Profile</span>
+          </a>
+        </nav>
+        }
+    </div>
+    <div class="quick-actions">
       @if (loginService.isLoggedIn | async) {
-      <nav class="nav-links">
-        <a routerLink="/tasks" routerLinkActive="active-link">
-          <span class="material-icons">assignment</span>
-          <span class="app-page">Tasks</span>
-        </a>
-        <a routerLink="/statistics" routerLinkActive="active-link">
-          <span class="material-icons">bar_chart</span>
-          <span class="app-page">Stats</span>
-        </a>
-        <a routerLink="/profile" routerLinkActive="active-link">
-          <span class="material-icons">person</span>
-          <span class="app-page">Profile</span>
-        </a>
-      </nav>
+        <button class="logout-btn" (click)="loginService.logout()">
+          <span class="material-icons">logout</span>
+        </button>
       }
-  </div>
-  <div class="quick-actions">
-    @if (loginService.isLoggedIn | async) {
-      <button class="logout-btn" (click)="loginService.logout()">
-        <span class="material-icons">logout</span>
+      <button class="theme-toggle" (click)="toggleTheme()">
+        @if(isDarkModeActive()) {
+          <span class="material-icons">
+            light_mode
+          </span>
+        }
+        @else {
+          <span class="material-icons">
+            dark_mode
+          </span>
+        }
       </button>
-    }
-    <button class="theme-toggle" (click)="toggleTheme()">
-      @if(isDarkModeActive()) {
-        <span class="material-icons">
-          light_mode
-        </span>
-      }
-      @else {
-        <span class="material-icons">
-          dark_mode
-        </span>
-      }
-    </button>
-  </div>
-</header>
-<main class="app-content">
-  <router-outlet></router-outlet>
-</main>
+    </div>
+  </header>
+
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 TaskManager by <strong>lukoq</strong></p>
+      <div class="footer-links">
+        <a href="https://github.com/lukoq" target="_blank">GitHub</a>
+        <a href="mailto:lukkin1@st.amu.edu.pl">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
