@@ -17,4 +17,15 @@ export class ProfileService {
   changePassword(oldPassword: string, newPassword: string): Observable<string> {
     return this.http.post(`${this.apiUrl}/change-password`, {oldPassword, newPassword}, {responseType: 'text' });
   }
+
+  uploadProfilePicture(file: File): Observable<void> {
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    return this.http.post<void>(`${this.apiUrl}/profile-picture`, formData);
+  }
+  
+  getProfilePictureUrl(): string {
+    return `${this.apiUrl}/profile-picture`;
+  }
 }

@@ -29,6 +29,9 @@ export class ProfileComponent {
   showOldPassword = signal(false);
   showNewPassword = signal(false);
   showRepeatPassword = signal(false);
+  previewUrl = signal<string | null>(null);
+  isUploading = signal(false);
+  errorMessage = signal<string | null>(null);
 
   profile = signal<Profile | null>(null);
 
@@ -109,6 +112,42 @@ export class ProfileComponent {
         this.profile.set(data);
       },
       error: (err) => console.error('err', err)
+    });
+  }
+
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if(!file){
+      return;
+    } 
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if(!allowedTypes.includes(file.type)) {
+      this.errorMessage.set('Only JPEG, PNG and WEBP images are allowed');
+      return;
+    }
+
+    if(file.size > 5 * 1024 * 1024) {
+      this.errorMessage.set('File size must be less than 5MB');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => this.previewUrl.set(reader.result as string);
+    reader.readAsDataURL(file);
+
+    this.errorMessage.set(null);
+    this.isUploading.set(true);
+
+    this.profileService.uploadProfilePicture(file).subscribe({
+      next: () => this.isUploading.set(false),
+      error: (err) => {
+        this.isUploading.set(false);
+        this.errorMessage.set(err.error?.message ?? 'Upload failed');
+      }
     });
   }
 
