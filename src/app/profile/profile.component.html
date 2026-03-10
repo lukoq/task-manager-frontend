@@ -5,9 +5,13 @@
             <div class="text">
                 <span class="label profile">This is your profile page</span>
             </div>
-            <span class="material-icons avatar">
-                account_circle
-            </span>
+            
+            <img
+              [src]="previewUrl() ?? 'default-avatar.png'" 
+              alt="Profile picture"
+              width="256"
+              height="256"
+            />
         </div>
       <div class="card">
         <div class="text">
