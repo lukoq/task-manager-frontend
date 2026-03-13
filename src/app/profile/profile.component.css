@@ -34,9 +34,8 @@
     padding: 16px;
 }
 .avatar {
-    font-size: 10.0rem;
-    color: var(--color-btn-newpage);
-    justify-self: center;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .value {
     font-size: 1.5rem;
@@ -63,7 +62,7 @@ button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
-.btn-changeapassword { 
+.btn-action { 
     background: var(--color-btn-green);
     color: var(--color-text-white);
 }
@@ -193,6 +192,11 @@ input.error {
   display: inline-block;
   margin-right: 8px;
   vertical-align: middle;
+}
+
+.upload {
+  justify-self: end;
+  align-self: end;
 }
 
 @keyframes spin {

@@ -5,13 +5,34 @@
             <div class="text">
                 <span class="label profile">This is your profile page</span>
             </div>
-            
-            <img
-              [src]="previewUrl() ?? 'default-avatar.png'" 
-              alt="Profile picture"
-              width="256"
-              height="256"
-            />
+
+            <div>
+              <img
+                class="avatar"
+                [src]="previewUrl() ?? profilePictureUrl()" 
+                alt="Profile picture"
+                width="256"
+                height="256"
+              />
+
+            </div>
+            <div class="upload">
+              <input
+                #fileInput
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                style="display: none"
+                (change)="onFileSelected($event)"
+              />
+
+              <button class="btn-action" (click)="fileInput.click()" [disabled]="isUploading()">
+                {{ isUploading() ? 'Uploading...' : 'Change photo' }}
+              </button>
+
+              @if (errorMessage()) {
+                <span class="error">{{ errorMessage() }}</span>
+              }
+            </div>
         </div>
       <div class="card">
         <div class="text">
@@ -31,7 +52,7 @@
             <span class="value">************</span>
         </div>
         <div class="actions">
-            <button class="btn-changeapassword" (click)="openChangeModal()">
+            <button class="btn-action" (click)="openChangeModal()">
                 Change
             </button>
         </div>

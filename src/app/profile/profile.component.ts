@@ -34,6 +34,8 @@ export class ProfileComponent {
   errorMessage = signal<string | null>(null);
 
   profile = signal<Profile | null>(null);
+  profilePictureUrl = signal<string>('default-avatar.png');
+
 
   private profileService = inject(ProfileService);
 
@@ -104,6 +106,19 @@ export class ProfileComponent {
   
   ngOnInit(): void {
     this.loadProfileInfo();
+    this.loadProfilePicture()
+  }
+
+
+  loadProfilePicture() {
+    this.profileService.getProfilePicture().subscribe({
+      next: (data) => {
+        this.profilePictureUrl.set(URL.createObjectURL(data));
+      },
+      error: () => {
+        this.profilePictureUrl.set('default-avatar.png');
+      }
+    });
   }
 
   loadProfileInfo() {
@@ -126,12 +141,12 @@ export class ProfileComponent {
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
     if(!allowedTypes.includes(file.type)) {
-      this.errorMessage.set('Only JPEG, PNG and WEBP images are allowed');
+      this.errorMessage.set(' Only JPEG, PNG and WEBP images are allowed');
       return;
     }
 
     if(file.size > 5 * 1024 * 1024) {
-      this.errorMessage.set('File size must be less than 5MB');
+      this.errorMessage.set(' File size must be less than 5MB');
       return;
     }
 
@@ -146,7 +161,7 @@ export class ProfileComponent {
       next: () => this.isUploading.set(false),
       error: (err) => {
         this.isUploading.set(false);
-        this.errorMessage.set(err.error?.message ?? 'Upload failed');
+        this.errorMessage.set(err.error?.message ?? ' Upload failed');
       }
     });
   }

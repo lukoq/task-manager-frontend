@@ -25,7 +25,7 @@ export class ProfileService {
     return this.http.post<void>(`${this.apiUrl}/profile-picture`, formData);
   }
   
-  getProfilePictureUrl(): string {
-    return `${this.apiUrl}/profile-picture`;
+  getProfilePicture(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/profile-picture`, { responseType: 'blob' });
   }
 }
