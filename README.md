@@ -5,9 +5,9 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 A frontend web application for managing tasks.
 This application allows users to register, log in, create tasks, edit them, and manage them through an interactive dashboard.
 
-⚠️ This frontend **requires the backend API** to run correctly:
+**!** This frontend **requires the backend API** to run correctly:
 
-➡ Backend repository: [https://github.com/lukoq/task-manager-backend](https://github.com/lukoq/task-manager-backend)
+**!** Backend repository: [https://github.com/lukoq/task-manager-backend](https://github.com/lukoq/task-manager-backend)
 
 ## Features
 
@@ -24,7 +24,7 @@ This application allows users to register, log in, create tasks, edit them, and 
 
 This frontend requires the backend API to function.
 
-1. Follow the setup instructions in the backend README. ⬆️
+1. Follow the setup instructions in the backend README. 
   
 2. Start the backend server before running the frontend.
 
